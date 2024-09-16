@@ -36,6 +36,10 @@ body {
   border-radius: 20%;
 }
 
+#countdown{
+  color:#FEF2BF ;
+}
+
 
 .footer {
   font-family: 'Press Start 2P', cursive;
