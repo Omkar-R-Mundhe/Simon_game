@@ -3,10 +3,6 @@ var gamePattern = [];
 var userClickedPattern = [];
 var started = false;
 var level = 0;
-var timeout;
-var interval;
-var timeLimit = 5;
-var timeRemaining = timeLimit;
 
 $(document).keypress(function() {
   if (!started) {
@@ -21,15 +17,13 @@ $(".btn").click(function() {
   userClickedPattern.push(userChosenColour);
   playSound(userChosenColour);
   animatePress(userChosenColour);
-  checkAnswer(userClickedPattern.length-1);
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 function checkAnswer(currentLevel) {
   if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-    resetTimer();
-
     if (userClickedPattern.length === gamePattern.length) {
-      setTimeout(function () {
+      setTimeout(function() {
         nextSequence();
       }, 1000);
     }
@@ -47,15 +41,11 @@ function nextSequence() {
   gamePattern.push(randomChosenColour);
   $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
   playSound(randomChosenColour);
-  if ($("#countdown").length === 0) {
-    $("body").append('<h2 id="countdown">Time left: <span id="time-left">5</span> seconds</h2>');
-  }
-  startTimer();
 }
 
 function animatePress(currentColor) {
   $("#" + currentColor).addClass("pressed");
-  setTimeout(function () {
+  setTimeout(function() {
     $("#" + currentColor).removeClass("pressed");
   }, 100);
 }
@@ -69,49 +59,15 @@ function startOver() {
   level = 0;
   gamePattern = [];
   started = false;
-  clearTimeout(timeout);
-  clearInterval(interval);
-  $("#countdown").remove();
-}
-
-function startTimer() {
-  clearTimeout(timeout);
-  clearInterval(interval);
-  timeRemaining = timeLimit;
-  updateCountdown();
-  $("#countdown").show();
-
-  interval = setInterval(function() {
-    timeRemaining--;
-    updateCountdown();
-
-    if (timeRemaining <= 0) {
-      gameOver();
-    }
-  }, 1000);
-
-  timeout = setTimeout(function () {
-    gameOver();
-  }, timeLimit * 1000);
-}
-
-function resetTimer() {
-  clearTimeout(timeout);
-  clearInterval(interval);
-  startTimer();
-}
-
-function updateCountdown() {
-  $("#time-left").text(timeRemaining);
+  $("#countdown").remove(); // Remove this line if it was added by mistake
 }
 
 function gameOver() {
   playSound("wrong");
   $("body").addClass("game-over");
-  setTimeout(function () {
+  setTimeout(function() {
     $("body").removeClass("game-over");
   }, 200);
   $("#level-title2").text("Game Over, Press Any Keyboard Key to Restart");
-  clearInterval(interval);
   startOver();
 }
