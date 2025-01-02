@@ -56,7 +56,7 @@ The game uses sound files to provide audio feedback. Each button corresponds to 
 ## Installation and Setup ⚙️
 1.Clone the repository:
    ```bash
-   git clone https://github.com/Omkar-R-Mundhe/simon-game.git
+   git clone https://github.com/Omkar-R-Mundhe/simon_game.git
    ```
  2.Navigate to the project directory:
  ```bash
