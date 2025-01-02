@@ -6,7 +6,7 @@ var level = 0;
 
 $(document).keypress(function() {
   if (!started) {
-    $("#level-title2").text("Level " + level);
+    // $("#level-title2").text("Level " + level);
     nextSequence();
     started = true;
   }
